@@ -10,7 +10,7 @@ var config = {
 firebase.initializeApp(config);
 
 var database = firebase.database();
-var warrantyList = [];
+var warrantyList = new Array();
 
 function onPageLoad() {
   database.ref('Warranties').once('value').then(function(snapshot) {
@@ -23,16 +23,23 @@ function onPageLoad() {
           store:childData.store,
           price:childData.price,
           customerName:fullName
-          
         }
-        warrantyList.push(warranty);
+          var table = document.getElementById('mainTable');
+          var newRow = table.insertRow(table.rows.length);
+          var newCell = newRow.insertCell(0);
+          newCell.innerHTML = warranty.serialNumber;
       });
-      
     });
+
+    
     document.getElementsByClassName('loading')[0].style.visibility = "hidden";
+    
+    
+    
   });
-  console.log(warrantyList);
 }
+
+
 
 function getCustomerName(uid, fn) {
   database.ref('Users').orderByKey().equalTo(uid).limitToFirst(1).once('value').then(function(snapshot){
