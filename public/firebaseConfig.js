@@ -6,17 +6,39 @@ var config = {
   storageBucket: "myisproject-61270.appspot.com",
   messagingSenderId: "767412484620"
 };
-console.log("it works.");
-var firebase = require("firebase/app");
-require("firebase/auth");
-require("firebase/database");
+
 firebase.initializeApp(config);
 
-
-// // Get a reference to the database service
-// var database = firebase.database();
-// var serialNumber = firebase.database().Warranties;
+var database = firebase.database();
+var warrantyList = [];
 
 function onPageLoad() {
-    alert("Page loaded");
+  database.ref('Warranties').once('value').then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      var childData = childSnapshot.val();
+      getCustomerName(childData.uid, function(fullName){
+        var warranty = {serialNumber:childData.serialNumber, 
+          type:childData.type, 
+          model:childData.typeText,
+          store:childData.store,
+          price:childData.price,
+          customerName:fullName
+          
+        }
+        warrantyList.push(warranty);
+      });
+      
+    });
+    document.getElementsByClassName('loading')[0].style.visibility = "hidden";
+  });
+  console.log(warrantyList);
+}
+
+function getCustomerName(uid, fn) {
+  database.ref('Users').orderByKey().equalTo(uid).limitToFirst(1).once('value').then(function(snapshot){
+    snapshot.forEach(function(childSnapshot) {
+      var childData = childSnapshot.val()
+      fn(childData.fullName);
+    });
+  });
 }
