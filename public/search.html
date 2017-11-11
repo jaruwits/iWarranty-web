@@ -10,6 +10,7 @@
     <script src="https://www.gstatic.com/firebasejs/4.6.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.6.1/firebase-messaging.js"></script>
     <script src="./firebaseConfig.js"></script>
+    <script src="./search.js"></script>
 
 
     <!-- <script src="./bundle.js"></script> -->
@@ -290,11 +291,8 @@
 <br>
 <center>
     <h3 style="color:#4CAF50;">กรุณาระบุข้อมูลใบรับประกันสินค้า:</h3>
-
-    <form>
-        <input type="search" name="searchs" placeholder="Search...">
-        <input type="submit" value="search">
-    </form>
+        <input type="text" name="search" placeholder="Search..." id="search">
+        <button type="button" onclick="onSearchClicked()">Search</button>
     <br>
     <table id="mainTable">
         <tr>
@@ -306,18 +304,9 @@
                 <th>สาขาที่ซื้อ</th>
                 <th>ราคา</th>
                 <th>ชื่อ-นามสกุลลูกค้า</th>
+                <th>วันที่ซื้อสินค้า</th>
             </center>
         </tr>
-        <tr>
-            <td> 00001</td>
-            <td> กมลพรรณ เกตุเหลือ</td>
-            <td> ตู้เย็น</td>
-            <td> 043982</td>
-            <td> 10/10/60</td>
-            <td> ตู้เย็นไม่เย็น</td>
-            <td> -</td>
-        </tr>
-
 
     </table>
 
