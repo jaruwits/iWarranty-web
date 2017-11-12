@@ -274,7 +274,7 @@
 </head>
 
 
-<body bgcolor="#F8F8FF">
+<body bgcolor="#F8F8FF" onload="onPageLoad()">
 
 <div class="loading"></div>
 
@@ -297,8 +297,8 @@
     <table id="mainTable">
         <tr>
             <center>
-                <th>รหัสลูกค้า</th>
                 <th>ชื่อ-นามสกุล</th>
+                <th>ประเภทสินค้า</th>
                 <th>สินค้า</th>
                 <th>หมายเลขเครื่อง</th>
                 <th>วันที่ส่งซ่อม</th>
@@ -308,38 +308,6 @@
                 <th></th>
             </center>
         </tr>
-        <tr>
-            <td> 00001</td>
-            <td> กมลพรรณ เกตุเหลือ</td>
-            <td> ตู้เย็น</td>
-            <td> 043982</td>
-            <td> 10/10/60</td>
-            <td> ตู้เย็นไม่เย็น</td>
-            <td> -</td>
-            <td>
-                <form>
-                    <div class="form-group">
-                        <select class="form-control" id="select">
-                            <option>----เลือกสถานะแจ้งลูกค้า----</option>
-                            <option>บริษัทได้รับสินค้าแล้ว</option>
-                            <option>บริษัทกำลังตรวจสอบสินค้า</option>
-                            <option>รออะไหล่สินค้า</option>
-                            <option>อยู่ในระหว่างการจัดส่งสินค้า</option>
-                            <option>สินค้าอยู่ในระหว่างการซ่อม</option>
-                        </select>
-                    </div>
-                </form>
-            </td>
-            <td>
-                <form>
-                    <center>
-
-                        <button type="button">OK</button>
-                    </center>
-                </form>
-            </td>
-        </tr>
-
 
     </table>
 
