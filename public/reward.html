@@ -1,13 +1,27 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" class="no-js">
 <head>
+  <!-- Firebase script-->
   <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+  <!-- Cloudinary core script -->
   <script src="./node_modules/lodash/lodash.js"></script>
   <script src="./node_modules/cloudinary-core/cloudinary-core.js"></script>
+  <!-- Cloudinary file upload script -->
+  <script src="node_modules/jquery/dist/jquery.js"></script>
+  <script src="node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+  <script src="node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+  <script src="node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
+  <script src="node_modules/cloudinary-jquery-file-upload/cloudinary-jquery-file-upload.js"></script>
+
+  <script src='https://cdn.jsdelivr.net/jquery.cloudinary/1.0.18/jquery.cloudinary.js' type='text/javascript'></script>
+  <script src="//widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+  <!-- Function script -->
   <script src="./firebaseConfig.js"></script>
+  <script src="reward.js"></script>
 
   <title> IWarranty Application </title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="dtqcoxdoj" content="demo">
   <style>
 body {margin:0;}
 /*menu bar*/
@@ -95,7 +109,7 @@ input[type=submit] {
 </head>
 
 
-<body bgcolor="#F8F8FF" onload="myFunction()">
+<body bgcolor="#F8F8FF" onload="onPageLoad()">
 
   <div class="topnav">
     <a href="home.html" title="click to home">หน้าหลัก</a>
@@ -109,82 +123,10 @@ input[type=submit] {
   <br>
   <br>
   <center>
-    <input type="file" id="myFile" multiple size="50" onchange="myFunction()">
+    <div id="demo"></div>
+    <input type="submit" value="Choose file" onclick="openUploadWidget()">
+    <p style="color:#727272"><strong>Tip:</strong> กรุณาเลือกไฟล์เพื่อ upload โดยเป็นนามสกุล .jpg .jpeg .png</p>
 
-    <p id="demo"></p>
-
-    <script>
-    function myFunction(){
-        var x = document.getElementById("myFile");
-        var txt = "";
-        if ('files' in x) {
-          if (x.files.length == 0) {
-              txt = "กรุณาเลือกไฟล์เพื่อ upload โดยเป็นนามสกุล .jpg .jpeg .png";
-          } else {
-              for (var i = 0; i < x.files.length; i++) {
-                  txt += "<br><strong>" + (i+1) + ". file</strong><br>";
-                  var file = x.files[i];
-                  if ('name' in file) {
-                      txt += "name: " + file.name + "<br>";
-                  }
-                  if ('size' in file) {
-                      txt += "size: " + file.size + " bytes <br>";
-                  }
-              }
-          }
-      }
-    else {
-        if (x.value == "") {
-            txt += "กรุณาเลือกไฟล์เพื่อ upload โดยเป็นนามสกุล .jpg .jpeg .png";
-        } else {
-            txt += "ไฟล์ที่ upload ไม่ใช่ไฟล์ที่กำหนดไว้ กรุณาเลือกไฟล์ใหม่อีกครั้งค่ะ";
-            txt  += "<br>Path ที่คุณเลือกคือ: " + x.value; // If the browser does not support the files property, it will return the path of the selected file instead.
-        }
-    }
-
-//    document.getElementById("demo").innerHTML = .jpg;
-//    document.getElementById("demo").innerHTML = .jpeg;
-//    document.getElementById("demo").innerHTML = .png;
-}
-
-
-function previewImages() {
-
-  var preview = document.querySelector('#preview');
-
-  if (this.files) {
-    [].forEach.call(this.files, readAndPreview);
-  }
-
-  function readAndPreview(file) {
-
-    // Make sure `file.name` matches our extensions criteria
-    if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
-      return alert(file.name + " is not an image");
-    } // else...
-
-    var reader = new FileReader();
-
-    reader.addEventListener("load", function() {
-      var image = new Image();
-      image.height = 100;
-      image.title  = file.name;
-      image.src    = this.result;
-      preview.appendChild(image);
-    }, false);
-
-    reader.readAsDataURL(file);
-
-  }
-
-}
-
-document.querySelector('#myFile').addEventListener("change", previewImages, false);
-</script>
-
-<p style="color:#727272"><strong>Tip:</strong> กรุณาเลือกไฟล์เพื่อ upload โดยเป็นนามสกุล .jpg .jpeg .png</p>
-
-<input type="submit" value="Upload">
 
 
 

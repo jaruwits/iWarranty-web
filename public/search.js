@@ -11,18 +11,14 @@ function onSearchClicked() {
     getWarranties(document.getElementById('search').value);
 }
 
-function getWarranties(serialNumber) {
+function getWarranties(searchValue) {
     //Clean data from table
     var table = document.getElementById('mainTable');
     table.innerHTML = table.rows[0].innerHTML;
     document.getElementsByClassName('loading')[0].style.visibility = "visible";
 
-    var dbRef;
-    if (serialNumber) {
-        dbRef = database.ref('Warranties').orderByChild('serialNumber').equalTo(serialNumber);
-    } else {
-        dbRef = database.ref('Warranties');
-    }
+    var dbRef = database.ref('Warranties');
+
     dbRef.once('value').then(function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
             var childData = childSnapshot.val();
@@ -37,6 +33,15 @@ function getWarranties(serialNumber) {
                     customerName: fullName,
                     buyDate: childData.buyDate
                 };
+
+                if ( !(!searchValue
+                    || searchValue == fullName
+                    || searchValue == warranty.serialNumber
+                    || searchValue == warranty.type
+                    || searchValue == warranty.store) ) {
+                    return
+                }
+                
                 var table = document.getElementById('mainTable');
                 var newRow = table.insertRow(table.rows.length);
 

@@ -17,12 +17,8 @@ function getHistories(searchValue) {
     table.innerHTML = table.rows[0].innerHTML;
     document.getElementsByClassName('loading')[0].style.visibility = "visible";
 
-    var dbRef;
-    //if (serialNumber) {
-        dbRef = database.ref('Histories')//.orderByChild('serialNumber').equalTo(serialNumber);
-    //} else {
-        dbRef = database.ref('Histories');
-    //}
+    var dbRef = database.ref('Histories');
+
     dbRef.once('value').then(function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
             var childData = childSnapshot.val();
