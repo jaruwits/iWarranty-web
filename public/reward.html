@@ -105,6 +105,27 @@ input[type=submit] {
     color: white;
 }
 
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+/*tr:nth-child(even) {*/
+    /*background-color: #d0d0d0*/
+/*}*/
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
 </style>
 </head>
 
@@ -126,7 +147,16 @@ input[type=submit] {
     <div id="demo"></div>
     <input type="submit" value="Choose file" onclick="openUploadWidget()">
     <p style="color:#727272"><strong>Tip:</strong> กรุณาเลือกไฟล์เพื่อ upload โดยเป็นนามสกุล .jpg .jpeg .png</p>
+      <table id="mainTable">
+          <tr>
+              <center>
+                  <th>No.</th>
+                  <th>รูปภาพ</th>
+                  <th>Action</th>
+              </center>
+          </tr>
 
+      </table>
 
 
 

@@ -1,7 +1,7 @@
 /**
  * Created by Jaruwit on 11/12/2017 AD.
  */
-var database = firebase.database();
+var dbRef = firebase.database().ref('Promotions');
 
 
 function openUploadWidget() {
@@ -9,9 +9,15 @@ function openUploadWidget() {
     cloudinary.openUploadWidget({ cloud_name: 'dtqcoxdoj', upload_preset: 'y3mvrxue', tags: ['cgal']},
         function(error, result) {
             if(error) console.log(error);
-            // If NO error, log image data to console
+            //NO Error
+
             var id = result[0].public_id;
-            console.log(processImage(id));
+            var pictureJSON = {
+                "pictureId": id,
+                "added_at": firebase.database.ServerValue.TIMESTAMP
+            };
+            dbRef.push(pictureJSON);
+
         });
 
 }
@@ -24,7 +30,31 @@ function processImage(id) {
 }
 
 function onPageLoad() {
-    var cl = cloudinary.Cloudinary.new( { cloud_name: "dtqcoxdoj"});
-    cl.fromDocument();
-    //document.getElementById("demo").innerHTML =  cl.imageTag("d6gkk1mjusza30vzjvf8").toHtml();
+    dbRef.once('value').then(function (snapshot) {
+        var i = 0;
+        snapshot.forEach(function (childSnapShot) {
+            var childData = childSnapShot.val();
+            var cl = cloudinary.Cloudinary.new( { cloud_name: "dtqcoxdoj"});
+            cl.fromDocument();
+
+            var table = document.getElementById('mainTable');
+            var newRow = table.insertRow(table.rows.length);
+
+            var actionCell = newRow.insertCell(0);
+            var imgCell = newRow.insertCell(0);
+            var noCell = newRow.insertCell(0);
+
+            var btn = document.createElement('input');
+            btn.type = "button";
+            btn.value = "DELETE";
+            btn.onclick = function () {
+                writeData(history.serialNumber)
+            }
+            actionCell.append(btn);
+
+            noCell.innerHTML = i+1;
+            imgCell.innerHTML = cl.imageTag(childData.pictureId).transformation().crop("fit").width(300).toHtml();
+        });
+    });
+
 }
