@@ -17,20 +17,17 @@ function openUploadWidget() {
                 "added_at": firebase.database.ServerValue.TIMESTAMP
             };
             dbRef.push(pictureJSON);
-
+            onPageLoad();
         });
 
 }
 
-function processImage(id) {
-    var options = {
-        client_hints: true,
-    };
-    return '<img src="'+ $.cloudinary.url(id, options) +'" style="width: 100%; height: auto"/>';
-}
-
 function onPageLoad() {
-    dbRef.once('value').then(function (snapshot) {
+    var table = document.getElementById('mainTable');
+    table.innerHTML = table.rows[0].innerHTML;
+    document.getElementsByClassName('loading')[0].style.visibility = "visible";
+
+    dbRef.orderByChild("added_at").once('value').then(function (snapshot) {
         var i = 0;
         snapshot.forEach(function (childSnapShot) {
             var childData = childSnapShot.val();
@@ -48,13 +45,19 @@ function onPageLoad() {
             btn.type = "button";
             btn.value = "DELETE";
             btn.onclick = function () {
-                writeData(history.serialNumber)
+                deleteData(childSnapShot)
             }
             actionCell.append(btn);
 
-            noCell.innerHTML = i+1;
+            noCell.innerHTML = i+=1;
             imgCell.innerHTML = cl.imageTag(childData.pictureId).transformation().crop("fit").width(300).toHtml();
         });
+        document.getElementsByClassName('loading')[0].style.visibility = "hidden";
     });
 
+}
+
+function deleteData(pictureSnapshot) {
+    pictureSnapshot.ref.remove();
+    onPageLoad();
 }

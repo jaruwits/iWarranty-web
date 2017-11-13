@@ -62,3 +62,39 @@
 [info] i  hosting: Serving hosting files from: public
 [info] ✔  hosting: Local server: http://localhost:5000
 
+[debug] [2017-11-13T12:42:58.157Z] ----------------------------------------------------------------------
+[debug] [2017-11-13T12:42:58.168Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve
+[debug] [2017-11-13T12:42:58.169Z] CLI Version:   3.14.0
+[debug] [2017-11-13T12:42:58.169Z] Platform:      darwin
+[debug] [2017-11-13T12:42:58.169Z] Node Version:  v6.11.5
+[debug] [2017-11-13T12:42:58.170Z] Time:          Mon Nov 13 2017 19:42:58 GMT+0700 (+07)
+[debug] [2017-11-13T12:42:58.170Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-11-13T12:42:58.207Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-11-13T12:42:58.208Z] > authorizing via signed-in user
+[debug] [2017-11-13T12:42:58.219Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2017-11-13T12:42:58.220Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/_90mpUttKmac9d24T9SvJ9kkR67kBSZjb0bwK5o3Dw0',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Mon Nov 13 2017 19:42:58 GMT+0700 (+07)
+[debug] [2017-11-13T12:42:58.545Z] <<< HTTP RESPONSE 200
+[debug] [2017-11-13T12:42:58.567Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/myisproject-61270  
+ Mon Nov 13 2017 19:42:58 GMT+0700 (+07)
+[debug] [2017-11-13T12:42:59.753Z] <<< HTTP RESPONSE 200
+[debug] [2017-11-13T12:42:59.755Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/myisproject-61270/tokens  
+ Mon Nov 13 2017 19:42:59 GMT+0700 (+07)
+[debug] [2017-11-13T12:43:00.952Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/Jaruwit/Development/iWarranty-web'...
+[info] 
+[debug] [2017-11-13T12:43:00.957Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/myisproject-61270  
+ Mon Nov 13 2017 19:43:00 GMT+0700 (+07)
+[debug] [2017-11-13T12:43:02.353Z] <<< HTTP RESPONSE 200
+[debug] [2017-11-13T12:43:02.354Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/767412484620/clients/_:getWebAppConfig  
+ Mon Nov 13 2017 19:43:02 GMT+0700 (+07)
+[debug] [2017-11-13T12:43:03.993Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] ✔  hosting: Local server: http://localhost:5000
+
