@@ -145,6 +145,8 @@ var ReportType = {
 
 function generateTable(reportType, dictionary, sum, monthName) {
     var tableTitle;
+    var p = document.createElement("p");
+    p.id = "tableTitle";
     if (reportType == ReportType.Warranty) {
         if (monthName == "" || typeof  monthName === 'undefined') {
             tableTitle = document.createTextNode("รายงานสินค้าที่มีการส่งซ่อมของปี 2017");
@@ -160,9 +162,10 @@ function generateTable(reportType, dictionary, sum, monthName) {
     } else if (reportType == ReportType.UserCount) {
         tableTitle = document.createTextNode("รายงานจำนวนผู้ใช้");
     }
+    p.append(tableTitle);
     var tableSection = document.getElementById('table-section');
     tableSection.innerHTML = "";
-    tableSection.appendChild(tableTitle);
+    tableSection.appendChild(p);
 
     var table = document.createElement('TABLE');
 
@@ -171,10 +174,13 @@ function generateTable(reportType, dictionary, sum, monthName) {
 
     var tr = document.createElement('TR');
     tableBody.appendChild(tr);
-    var th1 = document.createElement('TH');
-    th1.width = '100';
-    th1.appendChild(document.createTextNode("ประเภทสินค้า"));
-    tr.appendChild(th1);
+    if (monthName != null) {
+        var th1 = document.createElement('TH');
+        th1.width = '100';
+        th1.appendChild(document.createTextNode("ประเภทสินค้า"));
+        tr.appendChild(th1);
+    }
+
 
     for (var i = 0; i < Object.keys(dictionary).length; i++) {
         var tr = document.createElement('TR');

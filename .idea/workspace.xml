@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ea38feaa-8834-493f-9104-9c67525244c5" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/report.html" afterPath="$PROJECT_DIR$/public/report.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/report.js" afterPath="$PROJECT_DIR$/public/report.js" />
     </list>
     <ignored path="iWarranty-web.iws" />
@@ -95,25 +97,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="report.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="report.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/report.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1461">
-              <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+            <state relative-caret-position="344">
+              <caret line="61" column="30" selection-start-line="61" selection-start-column="30" selection-end-line="61" selection-end-column="30" />
               <folding>
                 <element signature="e#1027#1146#0" expanded="false" />
                 <element signature="e#1163#1269#0" expanded="false" />
-                <element signature="e#1368#1444#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="report.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="report.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/report.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
-              <caret line="203" column="131" selection-start-line="203" selection-start-column="131" selection-end-line="203" selection-end-column="131" />
+            <state relative-caret-position="382">
+              <caret line="167" column="30" selection-start-line="167" selection-start-column="30" selection-end-line="167" selection-end-column="30" />
               <folding>
                 <element signature="e#0#47#0" expanded="false" />
               </folding>
@@ -148,8 +149,8 @@
         <option value="$PROJECT_DIR$/public/search.js" />
         <option value="$PROJECT_DIR$/public/reward.html" />
         <option value="$PROJECT_DIR$/public/reward.js" />
-        <option value="$PROJECT_DIR$/public/report.html" />
         <option value="$PROJECT_DIR$/public/report.js" />
+        <option value="$PROJECT_DIR$/public/report.html" />
       </list>
     </option>
   </component>
@@ -301,16 +302,16 @@
       <workItem from="1510317234694" duration="26566000" />
       <workItem from="1510565670259" duration="1686000" />
       <workItem from="1510576675493" duration="3513000" />
-      <workItem from="1510584909292" duration="14043000" />
+      <workItem from="1510584909292" duration="15051000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45808000" />
+    <option name="totallyTimeSpent" value="46816000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1366" height="741" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22809668" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -318,7 +319,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18952234" sideWeight="0.49697885" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18952234" sideWeight="0.49697885" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -418,7 +419,6 @@
           <folding>
             <element signature="e#1027#1146#0" expanded="false" />
             <element signature="e#1163#1269#0" expanded="false" />
-            <element signature="e#1368#1444#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -658,34 +658,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/reward.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="107" column="0" selection-start-line="107" selection-start-column="0" selection-end-line="126" selection-end-column="1" />
-          <folding>
-            <element signature="e#2632#2719#0" expanded="false" />
-            <element signature="e#2728#2802#0" expanded="false" />
-            <element signature="e#2873#2925#0" expanded="false" />
-            <element signature="e#2966#3113#0" expanded="false" />
-            <element signature="e#3157#3304#0" expanded="false" />
-            <element signature="e#3389#3527#0" expanded="false" />
-            <element signature="e#3559#4540#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/report.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1461">
-          <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-          <folding>
-            <element signature="e#1027#1146#0" expanded="false" />
-            <element signature="e#1163#1269#0" expanded="false" />
-            <element signature="e#1368#1444#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/reward.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="157">
@@ -706,10 +678,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/report.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="203" column="131" selection-start-line="203" selection-start-column="131" selection-end-line="203" selection-end-column="131" />
+        <state relative-caret-position="382">
+          <caret line="167" column="30" selection-start-line="167" selection-start-column="30" selection-end-line="167" selection-end-column="30" />
           <folding>
             <element signature="e#0#47#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/reward.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="107" column="0" selection-start-line="107" selection-start-column="0" selection-end-line="126" selection-end-column="1" />
+          <folding>
+            <element signature="e#2632#2719#0" expanded="false" />
+            <element signature="e#2728#2802#0" expanded="false" />
+            <element signature="e#2873#2925#0" expanded="false" />
+            <element signature="e#2966#3113#0" expanded="false" />
+            <element signature="e#3157#3304#0" expanded="false" />
+            <element signature="e#3389#3527#0" expanded="false" />
+            <element signature="e#3559#4540#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/report.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="61" column="30" selection-start-line="61" selection-start-column="30" selection-end-line="61" selection-end-column="30" />
+          <folding>
+            <element signature="e#1027#1146#0" expanded="false" />
+            <element signature="e#1163#1269#0" expanded="false" />
           </folding>
         </state>
       </provider>
