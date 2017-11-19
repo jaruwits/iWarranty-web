@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" class="no-js">
 <head>
   <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
-  <script> src="firebaseConfig.js" type="text/javascript"></script>
+  <script src="firebaseConfig.js"></script>
 <script>
       var attempt = 3; // Variable to count number of attempts.
       // Below function Executes on click of login button.
@@ -12,6 +12,7 @@
           if ( username == "admin" && password == "admin"){
           alert ("ยินดีต้อนรับเข้าสู่ระบบ");
           window.location = "home.html"; // Redirecting to other page.
+              createUserName(username);
           return false;
           }
           else{

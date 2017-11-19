@@ -82,9 +82,6 @@ function onOKClick() {
                 }
 
             });
-            if (sum <= 0) {
-                return;
-            }
             generateTable(ReportType.Warranty, dictionary, sum, monthName);
         });
     } else if (element.options[element.selectedIndex].text == "สินค้าที่ส่งซ่อม") {
@@ -115,9 +112,6 @@ function onOKClick() {
                 }
 
             });
-            if (sum <= 0) {
-                return;
-            }
             generateTable(ReportType.History, dictionary, sum, monthName);
         });
     } else {
@@ -126,10 +120,10 @@ function onOKClick() {
             var dictionary = {};
             snapshot.forEach(function (childSnapshot) {
                 var childData = childSnapshot.val();
-                if (typeof childData.sex === 'undefined') {
-                    childData.sex = "ไม่ระบุเพศ";
+                if (typeof childData.gender === 'undefined') {
+                    childData.gender = "ไม่ระบุเพศ";
                 }
-                typeof dictionary[childData.sex] === 'undefined' ? dictionary[childData.sex] = 1 : dictionary[childData.sex]++;
+                typeof dictionary[childData.gender] === 'undefined' ? dictionary[childData.gender] = 1 : dictionary[childData.gender]++;
                 sum++;
             });
             generateTable(ReportType.UserCount, dictionary, sum, null);
@@ -147,7 +141,10 @@ function generateTable(reportType, dictionary, sum, monthName) {
     var tableTitle;
     var p = document.createElement("p");
     p.id = "tableTitle";
-    if (reportType == ReportType.Warranty) {
+    console.log(sum);
+    if (sum <= 0) {
+        tableTitle = "ไม่พบข้อมูล";
+    } else if (reportType == ReportType.Warranty) {
         if (monthName == "" || typeof  monthName === 'undefined') {
             tableTitle = document.createTextNode("รายงานสินค้าที่มีการส่งซ่อมของปี 2017");
         } else {
@@ -166,6 +163,12 @@ function generateTable(reportType, dictionary, sum, monthName) {
     var tableSection = document.getElementById('table-section');
     tableSection.innerHTML = "";
     tableSection.appendChild(p);
+
+    //Create table if there is data
+    if (sum <= 0) {
+        return;
+    }
+
 
     var table = document.createElement('TABLE');
 
