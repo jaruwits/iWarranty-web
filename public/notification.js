@@ -1,13 +1,24 @@
 /**
  * Created by Jaruwit on 11/10/2017 AD.
  */
+
 var database = firebase.database();
+var queryUserName = sessionStorage.getItem('username') == "admin" ? "" : sessionStorage.getItem('username');
+
+function dismissLoadingIndicator() {
+    document.getElementsByClassName('loading')[0].style.visibility = "hidden";
+}
+
+function showLoadingIndicator() {
+    document.getElementsByClassName('loading')[0].style.visibility = "visible";
+}
 
 function onPageLoad() {
-    getHistories();
+    dismissLoadingIndicator();
 }
 
 function onSearchClicked() {
+    showLoadingIndicator();
     getHistories(document.getElementById('search').value);
 }
 
@@ -15,11 +26,15 @@ function getHistories(searchValue) {
     // clear data from table
     var table = document.getElementById('mainTable');
     table.innerHTML = table.rows[0].innerHTML;
-    document.getElementsByClassName('loading')[0].style.visibility = "visible";
 
-    var dbRef = database.ref('Histories');
+    // if admin
+    if (queryUserName == "") {
+        dbRef = database.ref('Histories').once('value');
+    } else {
+        dbRef = database.ref('Histories').orderByChild('brand').equalTo(queryUserName).once('value');
+    }
 
-    dbRef.once('value').then(function (snapshot) {
+    dbRef.then(function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
             var childData = childSnapshot.val();
             getCustomerName(childData.uid, function (fullName) {
@@ -119,7 +134,7 @@ function getHistories(searchValue) {
             })
         });
 
-        document.getElementsByClassName('loading')[0].style.visibility = "hidden";
+        dismissLoadingIndicator();
 
     });
 }

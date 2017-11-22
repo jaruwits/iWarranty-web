@@ -33,7 +33,7 @@ function getWarranties(searchValue) {
     if (queryUserName == "") {
         dbRef = database.ref('Warranties').once('value');
     } else {
-        dbRef = database.ref('Warranties').orderByChild('brand').equalTo('haha').once('value');
+        dbRef = database.ref('Warranties').orderByChild('brand').equalTo(queryUserName).once('value');
     }
 
     dbRef.then(function (snapshot) {
