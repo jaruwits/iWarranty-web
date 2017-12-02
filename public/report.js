@@ -4,6 +4,13 @@
 
 database = firebase.database();
 
+var ReportType = {
+    Warranty: 1,
+    History: 2,
+    UserCount: 3
+}
+
+
 function onReportCategoryChange() {
 
     var div = document.getElementById("form-group");
@@ -114,7 +121,7 @@ function onOKClick() {
             });
             generateTable(ReportType.History, dictionary, sum, monthName);
         });
-    } else {
+    } else if (element.options[element.selectedIndex].text == "จำนวนผู้ใช้งาน") {
         database.ref('Users').once('value').then(function (snapshot) {
             var sum = 0;
             var dictionary = {};
@@ -126,16 +133,286 @@ function onOKClick() {
                 typeof dictionary[childData.gender] === 'undefined' ? dictionary[childData.gender] = 1 : dictionary[childData.gender]++;
                 sum++;
             });
-            generateTable(ReportType.UserCount, dictionary, sum, null);
+            dictionary["รวมทั้งสิ้น"] = sum;
+            clearTemplate();
+            createTableHeader("รายงานจำนวนผู้ใช้งาน");
+            generateUserReport(dictionary, sum);
+
+            var ageRangeSum = 0;
+            var object2 = {};
+            object2["วัยเด็ก"] = 0;
+            object2["วัยรุ่น"] = 0;
+            object2["วัยผู้ใหญ่ตอนต้น"] = 0;
+            object2["วัยผู้ใหญ่ตอนปลาย"] = 0;
+            object2["วัยกลางคน"] = 0;
+            object2["วัยสูงอายุ"] = 0;
+            snapshot.forEach(function (childSnapshot) {
+                var childData = childSnapshot.val();
+                var yearOfBirth = childData.birthDate.split("/")[2];
+                var currentYear = (new Date()).getFullYear();
+                var age = currentYear-yearOfBirth;
+                if (age <= 18) {
+                    object2["วัยเด็ก"]++;
+                } else if (age > 18 && age <= 25) {
+                    object2["วัยรุ่น"]++;
+                } else if (age > 25 && age <= 35) {
+                    object2["วัยผู้ใหญ่ตอนต้น"]++;
+                } else if (age > 35 && age <= 45) {
+                    object2["วัยผู้ใหญ่ตอนปลาย"]++
+                } else if (age > 45 && age <= 60) {
+                    object2["วัยกลางคน"]++;
+                } else if (age > 60 && age <= 100) {
+                    object2["วัยสูงอายุ"]++;
+                }
+                ageRangeSum++;
+            });
+            object2["รวมทั้งสิ้น"] = ageRangeSum;
+            generateAgeRangeReport(object2, ageRangeSum);
+
+            var ageRangeSexSum = 0;
+            var object3 = {};
+            object3["วัยเด็ก"] = {male: 0, female: 0};
+            object3["วัยรุ่น"] = {male: 0, female: 0};
+            object3["วัยผู้ใหญ่ตอนต้น"] = {male: 0, female: 0};
+            object3["วัยผู้ใหญ่ตอนปลาย"] = {male: 0, female: 0};
+            object3["วัยกลางคน"] = {male: 0, female: 0};
+            object3["วัยสูงอายุ"] = {male: 0, female: 0};
+            object3["รวมทั้งสิ้น"] = {male: 0, female: 0};
+            snapshot.forEach(function (childSnapshot) {
+                var childData = childSnapshot.val();
+                var yearOfBirth = childData.birthDate.split("/")[2];
+                var currentYear = (new Date()).getFullYear();
+                var age = currentYear-yearOfBirth;
+                var sex = childData.gender;
+                if (age <= 18) {
+                    if (sex == "เพศชาย") {
+                        object3["วัยเด็ก"].male++;
+                        object3["รวมทั้งสิ้น"].male++;
+                    } else {
+                        object3["วัยเด็ก"].female++;
+                        object3["รวมทั้งสิ้น"].female++;
+                    }
+                } else if (age > 18 && age <= 25) {
+                    if (sex == "เพศชาย") {
+                        object3["วัยรุ่น"].male++;
+                        object3["รวมทั้งสิ้น"].male++;
+                    } else {
+                        object3["วัยรุ่น"].female++;
+                        object3["รวมทั้งสิ้น"].female++;
+                    }
+                } else if (age > 25 && age <= 35) {
+                    if (sex == "เพศชาย") {
+                        object3["วัยผู้ใหญ่ตอนต้น"].male++;
+                        object3["รวมทั้งสิ้น"].male++;
+                    } else {
+                        object3["วัยผู้ใหญ่ตอนต้น"].female++;
+                        object3["รวมทั้งสิ้น"].female++;
+                    }
+                } else if (age > 35 && age <= 45) {
+                    if (sex == "เพศชาย") {
+                        object3["วัยผู้ใหญ่ตอนปลาย"].male++;
+                        object3["รวมทั้งสิ้น"].male++;
+                    } else {
+                        object3["วัยผู้ใหญ่ตอนปลาย"].female++;
+                        object3["รวมทั้งสิ้น"].female++;
+                    }
+                } else if (age > 45 && age <= 60) {
+                    if (sex == "เพศชาย") {
+                        object3["วัยกลางคน"].male++;
+                        object3["รวมทั้งสิ้น"].male++;
+                    } else {
+                        object3["วัยกลางคน"].female++;
+                        object3["รวมทั้งสิ้น"].female++;
+                    }
+                } else if (age > 60 && age <= 100) {
+                    if (sex == "เพศชาย") {
+                        object3["วัยสูงอายุ"].male++;
+                        object3["รวมทั้งสิ้น"].male++;
+                    } else {
+                        object3["วัยสูงอายุ"].female++;
+                        object3["รวมทั้งสิ้น"].female++;
+                    }
+                }
+                ageRangeSexSum++;
+            });
+
+            generateAgeRangeSexReport(object3, ageRangeSexSum);
         });
     }
 }
 
-var ReportType = {
-    Warranty: 1,
-    History: 2,
-    UserCount: 3
+function clearTemplate() {
+    var tableSection = document.getElementById('table-section');
+    tableSection.innerHTML = "";
 }
+
+function createTableHeader(withTitle) {
+    var titleElement = document.createElement("p");
+    titleElement.id = withTitle;
+    var titleNode = document.createTextNode(withTitle);
+    titleElement.appendChild(titleNode);
+    var tableSection = document.getElementById('table-section');
+    tableSection.appendChild(titleElement);
+}
+
+function generateUserReport(object1, sum) {
+    var tableSection = document.getElementById('table-section');
+    var table = document.createElement('TABLE');
+    var tableBody = document.createElement('TBODY');
+    table.appendChild(tableBody);
+
+
+    var tr = document.createElement('TR');
+    tableBody.appendChild(tr);
+    var th1 = document.createElement('TH');
+    th1.width = '100';
+    th1.appendChild(document.createTextNode("จำนวนผู้ใช้งาน"));
+    tr.appendChild(th1);
+
+    for (var i = 0; i < Object.keys(object1).length; i++) {
+        var tr = document.createElement('TR');
+        tableBody.appendChild(tr);
+        for (var j = 0; j < 6; j++) {
+            var td = document.createElement('TD');
+            td.width = '100';
+            if (j == 0) {
+                td.appendChild(document.createTextNode(Object.keys(object1)[i]));
+            } else if (j == 1) {
+                td.appendChild(document.createTextNode(object1[Object.keys(object1)[i]]))
+            } else if (j ==2) {
+                td.appendChild(document.createTextNode("คน"));
+            } else if (j == 3) {
+                td.appendChild(document.createTextNode("คิดเป็น"));
+            } else if (j == 4) {
+                var percent = (object1[Object.keys(object1)[i]]/sum*100).toPrecision(3);
+                td.appendChild(document.createTextNode(percent));
+            } else {
+                td.appendChild(document.createTextNode("%"));
+            }
+            tr.appendChild(td);
+        }
+    }
+
+    tableSection.appendChild(table);
+}
+
+function generateAgeRangeReport(object2, sum) {
+    var tableSection = document.getElementById('table-section');
+    tableSection.setAttribute("style","overflow-x:hidden;overflow-y:auto");
+
+    var table = document.createElement('TABLE');
+    var tableBody = document.createElement('TBODY');
+    table.appendChild(tableBody);
+
+
+    var tr = document.createElement('TR');
+    tableBody.appendChild(tr);
+    var th1 = document.createElement('TH');
+    th1.width = '100';
+    th1.appendChild(document.createTextNode("ช่วงอายุของผู้ใช้งาน"));
+    tr.appendChild(th1);
+
+    for (var i = 0; i < Object.keys(object2).length; i++) {
+        var tr = document.createElement('TR');
+        tableBody.appendChild(tr);
+        for (var j = 0; j < 6; j++) {
+            var td = document.createElement('TD');
+            td.width = '50';
+            if (j == 0) {
+                td.appendChild(document.createTextNode(Object.keys(object2)[i]));
+            } else if (j == 1) {
+                td.appendChild(document.createTextNode(object2[Object.keys(object2)[i]]))
+            } else if (j == 2) {
+                td.appendChild(document.createTextNode("คน"));
+            } else if (j == 3) {
+                td.appendChild(document.createTextNode("คิดเป็น"));
+            } else if (j == 4) {
+                var percent = (object2[Object.keys(object2)[i]]/sum*100).toPrecision(3);
+                td.appendChild(document.createTextNode(percent));
+            } else if (j == 5) {
+                td.appendChild(document.createTextNode("%"));
+            }
+            tr.appendChild(td);
+        }
+    }
+
+    tableSection.appendChild(table);
+}
+
+function generateAgeRangeSexReport(object3, sum) {
+    var tableSection = document.getElementById('table-section');
+    tableSection.setAttribute("style","overflow-x:hidden;overflow-y:auto");
+
+    var table = document.createElement('TABLE');
+    var tableBody = document.createElement('TBODY');
+    table.appendChild(tableBody);
+
+
+    var tr = document.createElement('TR');
+    tableBody.appendChild(tr);
+    var th1 = document.createElement('TH');
+    th1.width = '100';
+    th1.appendChild(document.createTextNode("ช่วงอายุของผู้ใช้งาน"));
+    tr.appendChild(th1);
+    var th2 = document.createElement('TH');
+    th2.width = '100';
+    th2.colSpan = 2;
+    th2.appendChild(document.createTextNode("เพศหญิง"));
+    tr.appendChild(th2);
+    var th3 = document.createElement('TH');
+    th3.width = '100';
+    th3.colSpan = 2;
+    th3.appendChild(document.createTextNode("เพศชาย"));
+    tr.appendChild(th3);
+
+    for (var i = 0; i < Object.keys(object3).length; i++) {
+        var tr = document.createElement('TR');
+        tableBody.appendChild(tr);
+        for (var j = 0; j < 5; j++) {
+            var td = document.createElement('TD');
+            td.width = '100';
+            if (j == 0) {
+                td.appendChild(document.createTextNode(Object.keys(object3)[i]));
+            } else if (j == 1) {
+                var female = object3[Object.keys(object3)[i]].female;
+                td.appendChild(document.createTextNode( (female/sum*100).toPrecision(3) ));
+            } else if (j == 2) {
+                td.appendChild(document.createTextNode("%"));
+            } else if (j == 3) {
+                var male = object3[Object.keys(object3)[i]].male;
+                td.appendChild(document.createTextNode( (male/sum*100).toPrecision(3) ));
+            } else if (j == 4) {
+                td.appendChild(document.createTextNode("%"));
+            } else if (j == 5) {
+
+            }
+            tr.appendChild(td);
+        }
+    }
+
+    tableSection.appendChild(table);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function generateTable(reportType, dictionary, sum, monthName) {
     var tableTitle;
@@ -159,60 +436,5 @@ function generateTable(reportType, dictionary, sum, monthName) {
     } else if (reportType == ReportType.UserCount) {
         tableTitle = document.createTextNode("รายงานจำนวนผู้ใช้");
     }
-    p.append(tableTitle);
-    var tableSection = document.getElementById('table-section');
-    tableSection.innerHTML = "";
-    tableSection.appendChild(p);
 
-    //Create table if there is data
-    if (sum <= 0) {
-        return;
-    }
-
-
-    var table = document.createElement('TABLE');
-
-    var tableBody = document.createElement('TBODY');
-    table.appendChild(tableBody);
-
-    var tr = document.createElement('TR');
-    tableBody.appendChild(tr);
-    if (monthName != null) {
-        var th1 = document.createElement('TH');
-        th1.width = '100';
-        th1.appendChild(document.createTextNode("ประเภทสินค้า"));
-        tr.appendChild(th1);
-    }
-
-
-    for (var i = 0; i < Object.keys(dictionary).length; i++) {
-        var tr = document.createElement('TR');
-        tableBody.appendChild(tr);
-
-        for (var j = 0; j < 3; j++) {
-            var td = document.createElement('TD');
-            td.width = '100';
-            if (j == 0) {
-                td.appendChild(document.createTextNode(Object.keys(dictionary)[i]));
-            } else if (j == 1) {
-                td.appendChild(document.createTextNode(dictionary[Object.keys(dictionary)[i]]))
-            } else {
-                monthName == null ? td.appendChild(document.createTextNode("คน")) : td.appendChild(document.createTextNode("เครื่อง "));
-            }
-
-            tr.appendChild(td);
-        }
-    }
-    var trSum = document.createElement('TR');
-    tableBody.appendChild(trSum);
-    var tdSum = document.createElement('TD');
-    tdSum.appendChild(document.createTextNode('รวมทั้งสิ้น'));
-    var tdSum2 = document.createElement('TD');
-    tdSum2.appendChild(document.createTextNode(sum));
-    var tdSum3 = document.createElement('TD');
-    monthName == null ? tdSum3.appendChild(document.createTextNode('คน')) : tdSum3.appendChild(document.createTextNode('เครื่อง'));
-    trSum.appendChild(tdSum);
-    trSum.appendChild(tdSum2);
-    trSum.appendChild(tdSum3);
-    tableSection.appendChild(table);
 }
