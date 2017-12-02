@@ -144,29 +144,29 @@ function onOKClick() {
 
             var ageRangeSum = 0;
             var object2 = {};
-            object2["วัยเด็ก"] = 0;
-            object2["วัยรุ่น"] = 0;
-            object2["วัยผู้ใหญ่ตอนต้น"] = 0;
-            object2["วัยผู้ใหญ่ตอนปลาย"] = 0;
-            object2["วัยกลางคน"] = 0;
-            object2["วัยสูงอายุ"] = 0;
+            object2["วัยเด็ก (0-18 ปี)"] = 0;
+            object2["วัยรุ่น (19-25 ปี)"] = 0;
+            object2["วัยผู้ใหญ่ตอนต้น (26-35 ปี)"] = 0;
+            object2["วัยผู้ใหญ่ตอนปลาย (36-45 ปี)"] = 0;
+            object2["วัยกลางคน (46-60 ปี)"] = 0;
+            object2["วัยสูงอายุ (61-100 ปี)"] = 0;
             snapshot.forEach(function (childSnapshot) {
                 var childData = childSnapshot.val();
                 var yearOfBirth = childData.birthDate.split("/")[2];
                 var currentYear = (new Date()).getFullYear();
                 var age = currentYear-yearOfBirth;
                 if (age <= 18) {
-                    object2["วัยเด็ก"]++;
+                    object2["วัยเด็ก (0-18 ปี)"]++;
                 } else if (age > 18 && age <= 25) {
-                    object2["วัยรุ่น"]++;
+                    object2["วัยรุ่น (19-25 ปี)"]++;
                 } else if (age > 25 && age <= 35) {
-                    object2["วัยผู้ใหญ่ตอนต้น"]++;
+                    object2["วัยผู้ใหญ่ตอนต้น (26-35 ปี)"]++;
                 } else if (age > 35 && age <= 45) {
-                    object2["วัยผู้ใหญ่ตอนปลาย"]++
+                    object2["วัยผู้ใหญ่ตอนปลาย (36-45 ปี)"]++
                 } else if (age > 45 && age <= 60) {
-                    object2["วัยกลางคน"]++;
+                    object2["วัยกลางคน (46-60 ปี)"]++;
                 } else if (age > 60 && age <= 100) {
-                    object2["วัยสูงอายุ"]++;
+                    object2["วัยสูงอายุ (61-100 ปี)"]++;
                 }
                 ageRangeSum++;
             });
@@ -175,12 +175,12 @@ function onOKClick() {
 
             var ageRangeSexSum = 0;
             var object3 = {};
-            object3["วัยเด็ก"] = {male: 0, female: 0};
-            object3["วัยรุ่น"] = {male: 0, female: 0};
-            object3["วัยผู้ใหญ่ตอนต้น"] = {male: 0, female: 0};
-            object3["วัยผู้ใหญ่ตอนปลาย"] = {male: 0, female: 0};
-            object3["วัยกลางคน"] = {male: 0, female: 0};
-            object3["วัยสูงอายุ"] = {male: 0, female: 0};
+            object3["วัยเด็ก (0-18 ปี)"] = {male: 0, female: 0};
+            object3["วัยรุ่น (19-25 ปี)"] = {male: 0, female: 0};
+            object3["วัยผู้ใหญ่ตอนต้น (26-35 ปี)"] = {male: 0, female: 0};
+            object3["วัยผู้ใหญ่ตอนปลาย (36-45 ปี)"] = {male: 0, female: 0};
+            object3["วัยกลางคน (46-60 ปี)"] = {male: 0, female: 0};
+            object3["วัยสูงอายุ (61-100 ปี)"] = {male: 0, female: 0};
             object3["รวมทั้งสิ้น"] = {male: 0, female: 0};
             snapshot.forEach(function (childSnapshot) {
                 var childData = childSnapshot.val();
@@ -190,50 +190,50 @@ function onOKClick() {
                 var sex = childData.gender;
                 if (age <= 18) {
                     if (sex == "เพศชาย") {
-                        object3["วัยเด็ก"].male++;
+                        object3["วัยเด็ก (0-18 ปี)"].male++;
                         object3["รวมทั้งสิ้น"].male++;
                     } else {
-                        object3["วัยเด็ก"].female++;
+                        object3["วัยเด็ก (0-18 ปี)"].female++;
                         object3["รวมทั้งสิ้น"].female++;
                     }
                 } else if (age > 18 && age <= 25) {
                     if (sex == "เพศชาย") {
-                        object3["วัยรุ่น"].male++;
+                        object3["วัยรุ่น (19-25 ปี)"].male++;
                         object3["รวมทั้งสิ้น"].male++;
                     } else {
-                        object3["วัยรุ่น"].female++;
+                        object3["วัยรุ่น (19-25 ปี)"].female++;
                         object3["รวมทั้งสิ้น"].female++;
                     }
                 } else if (age > 25 && age <= 35) {
                     if (sex == "เพศชาย") {
-                        object3["วัยผู้ใหญ่ตอนต้น"].male++;
+                        object3["วัยผู้ใหญ่ตอนต้น (26-35 ปี)"].male++;
                         object3["รวมทั้งสิ้น"].male++;
                     } else {
-                        object3["วัยผู้ใหญ่ตอนต้น"].female++;
+                        object3["วัยผู้ใหญ่ตอนต้น (26-35 ปี)"].female++;
                         object3["รวมทั้งสิ้น"].female++;
                     }
                 } else if (age > 35 && age <= 45) {
                     if (sex == "เพศชาย") {
-                        object3["วัยผู้ใหญ่ตอนปลาย"].male++;
+                        object3["วัยผู้ใหญ่ตอนปลาย (36-45 ปี)"].male++;
                         object3["รวมทั้งสิ้น"].male++;
                     } else {
-                        object3["วัยผู้ใหญ่ตอนปลาย"].female++;
+                        object3["วัยผู้ใหญ่ตอนปลาย (36-45 ปี)"].female++;
                         object3["รวมทั้งสิ้น"].female++;
                     }
                 } else if (age > 45 && age <= 60) {
                     if (sex == "เพศชาย") {
-                        object3["วัยกลางคน"].male++;
+                        object3["วัยกลางคน (46-60 ปี)"].male++;
                         object3["รวมทั้งสิ้น"].male++;
                     } else {
-                        object3["วัยกลางคน"].female++;
+                        object3["วัยกลางคน (46-60 ปี)"].female++;
                         object3["รวมทั้งสิ้น"].female++;
                     }
                 } else if (age > 60 && age <= 100) {
                     if (sex == "เพศชาย") {
-                        object3["วัยสูงอายุ"].male++;
+                        object3["วัยสูงอายุ (61-100 ปี)"].male++;
                         object3["รวมทั้งสิ้น"].male++;
                     } else {
-                        object3["วัยสูงอายุ"].female++;
+                        object3["วัยสูงอายุ (61-100 ปี)"].female++;
                         object3["รวมทั้งสิ้น"].female++;
                     }
                 }
