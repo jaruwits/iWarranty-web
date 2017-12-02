@@ -17,7 +17,9 @@ function onReportCategoryChange() {
     var element = document.getElementById("select");
 
     if (element.options[element.selectedIndex].text == "ใบรับประกันสินค้า"
-        || element.options[element.selectedIndex].text == "สินค้าที่ส่งซ่อม") {
+        || element.options[element.selectedIndex].text == "สินค้าที่ส่งซ่อม"
+        || element.options[element.selectedIndex].text == "ผู้ใช้งานส่งใบรับประกัน"
+        || element.options[element.selectedIndex].text == "ผู้ใช้งานส่งซ่อมสินค้า") {
         if (div.contains(document.getElementById("yearSelect"))) {
             return
         }
@@ -89,6 +91,7 @@ function onOKClick() {
                 }
 
             });
+            dictionary["รวมทั้งสิ้น"] = sum;
             generateTable(ReportType.Warranty, dictionary, sum, monthName);
         });
     } else if (element.options[element.selectedIndex].text == "สินค้าที่ส่งซ่อม") {
@@ -119,6 +122,7 @@ function onOKClick() {
                 }
 
             });
+            dictionary["รวมทั้งสิ้น"] = sum;
             generateTable(ReportType.History, dictionary, sum, monthName);
         });
     } else if (element.options[element.selectedIndex].text == "จำนวนผู้ใช้งาน") {
@@ -238,6 +242,10 @@ function onOKClick() {
 
             generateAgeRangeSexReport(object3, ageRangeSexSum);
         });
+    } else if (element.options[element.selectedIndex].text == "ผู้ใช้งานส่งใบรับประกัน") {
+        getWarrantyWithAge();
+    } else if (element.options[element.selectedIndex].text == "ผู้ใช้งานส่งซ่อมสินค้า") {
+        getHistoryWithAge();
     }
 }
 
@@ -391,50 +399,4 @@ function generateAgeRangeSexReport(object3, sum) {
     }
 
     tableSection.appendChild(table);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function generateTable(reportType, dictionary, sum, monthName) {
-    var tableTitle;
-    var p = document.createElement("p");
-    p.id = "tableTitle";
-    console.log(sum);
-    if (sum <= 0) {
-        tableTitle = "ไม่พบข้อมูล";
-    } else if (reportType == ReportType.Warranty) {
-        if (monthName == "" || typeof  monthName === 'undefined') {
-            tableTitle = document.createTextNode("รายงานสินค้าที่มีการส่งซ่อมของปี 2017");
-        } else {
-            tableTitle = document.createTextNode("รายงานประเภทสินค้าที่มีการส่งใบรับประกันของเดือน" + monthName);
-        }
-    } else if (reportType == ReportType.History) {
-        if (monthName == "" || typeof  monthName === 'undefined') {
-            tableTitle = document.createTextNode("รายงานประเภทสินค้าที่มีการส่งใบรับประกันปี 2017");
-        } else {
-            tableTitle = document.createTextNode("รายงานประเภทสินค้าที่ส่งซ่อมของเดือน" + monthName);
-        }
-    } else if (reportType == ReportType.UserCount) {
-        tableTitle = document.createTextNode("รายงานจำนวนผู้ใช้");
-    }
-
 }
