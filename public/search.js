@@ -39,7 +39,7 @@ function getWarranties(searchValue) {
     dbRef.then(function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
             var childData = childSnapshot.val();
-            getCustomerName(childData.uid, function (fullName) {
+            getCustomerName(childData.uid, function (fullName, phone) {
                 var warranty = {
                     serialNumber: childData.serialNumber,
                     type: childData.type,
@@ -48,7 +48,8 @@ function getWarranties(searchValue) {
                     store: childData.store,
                     price: childData.price,
                     customerName: fullName,
-                    buyDate: childData.buyDate
+                    buyDate: childData.buyDate,
+                    phone: phone
                 };
 
                 if ( !(!searchValue
@@ -63,6 +64,7 @@ function getWarranties(searchValue) {
                 var newRow = table.insertRow(table.rows.length);
 
                 var buyDateCell = newRow.insertCell(0);
+                var phoneCell = newRow.insertCell(0);
                 var customerNameCell = newRow.insertCell(0);
                 var priceCell = newRow.insertCell(0);
                 var storeCell = newRow.insertCell(0);
@@ -79,6 +81,7 @@ function getWarranties(searchValue) {
                 priceCell.innerHTML = warranty.price;
                 customerNameCell.innerHTML = warranty.customerName;
                 buyDateCell.innerHTML = warranty.buyDate;
+                phoneCell.innerHTML = warranty.phone;
             });
         });
 
@@ -92,7 +95,7 @@ function getCustomerName(uid, fn) {
     database.ref('Users').orderByKey().equalTo(uid).limitToFirst(1).once('value').then(function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
             var childData = childSnapshot.val()
-            fn(childData.fullName);
+            fn(childData.fullName, childData.phone);
         });
     });
 }

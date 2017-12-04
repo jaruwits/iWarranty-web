@@ -37,7 +37,7 @@ function getHistories(searchValue) {
     dbRef.then(function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
             var childData = childSnapshot.val();
-            getCustomerName(childData.uid, function (fullName) {
+            getCustomerName(childData.uid, function (fullName, phone) {
 
                 var history = {
                     customerName: fullName,
@@ -46,7 +46,8 @@ function getHistories(searchValue) {
                     serialNumber: childData.serialNumber,
                     sendDate: childData.sendDate,
                     note: childData.note,
-                    lastStatus: childData.lastStatus
+                    lastStatus: childData.lastStatus,
+                    phone: phone
                 };
 
                 var lastStatuses = [];
@@ -82,9 +83,11 @@ function getHistories(searchValue) {
                 var serialNumberCell = newRow.insertCell(0);
                 var itemCell = newRow.insertCell(0);
                 var typeCell = newRow.insertCell(0);
+                var phoneCell = newRow.insertCell(0);
                 var customerNameCell = newRow.insertCell(0);
 
                 customerNameCell.innerHTML = history.customerName;
+                phoneCell.innerHTML = history.phone;
                 typeCell.innerHTML = history.type;
                 itemCell.innerHTML = history.item;
                 serialNumberCell.innerHTML = history.serialNumber;
@@ -157,7 +160,7 @@ function getCustomerName(uid, fn) {
     database.ref('Users').orderByKey().equalTo(uid).limitToFirst(1).once('value').then(function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
             var childData = childSnapshot.val()
-            fn(childData.fullName);
+            fn(childData.fullName, childData.phone);
         });
     });
 }
