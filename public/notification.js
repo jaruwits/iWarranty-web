@@ -124,6 +124,10 @@ function getHistories(searchValue) {
                 option5.innerHTML = "สินค้าอยู่ในระหว่างการซ่อม";
                 option5.value = "5";
                 element1.add(option5, null);
+                var option6 = document.createElement("option");
+                option6.innerHTML = "สินค้าไม่อยู่ในเงื่อนไขการรับซ่อม";
+                option6.value = "6";
+                element1.add(option6, null);
 
                 newStatusCell.appendChild(element1);
 
