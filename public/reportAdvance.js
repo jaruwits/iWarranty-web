@@ -3,7 +3,14 @@
  */
 
 function getWarrantyWithAge() {
-    database.ref('Warranties').once('value').then(function (snapshot) {
+    var dbRef;
+    // if admin
+    if (queryUserName == "") {
+        dbRef = database.ref('Warranties').once('value');
+    } else {
+        dbRef = database.ref('Warranties').orderByChild('brand').equalTo(queryUserName).once('value');
+    }
+    dbRef.then(function (snapshot) {
         var dictionary = {};
         var sum = 0;
         var monthName = "";
@@ -190,7 +197,12 @@ function generateReportWarrantyWithAge(dictionary, sum, monthName) {
 }
 
 function getHistoryWithAge() {
-    database.ref('Histories').once('value').then(function (snapshot) {
+    if (queryUserName == "") {
+        dbRef = database.ref('Histories').once('value');
+    } else {
+        dbRef = database.ref('Histories').orderByChild('brand').equalTo(queryUserName).once('value');
+    }
+    dbRef.then(function (snapshot) {
         var dictionary = {};
         var sum = 0;
         var monthName = "";

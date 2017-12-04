@@ -4,6 +4,8 @@
 
 database = firebase.database();
 
+var queryUserName = sessionStorage.getItem('username') == "admin" ? "" : sessionStorage.getItem('username');
+
 var ReportType = {
     Warranty: 1,
     History: 2,
@@ -62,9 +64,16 @@ function onReportCategoryChange() {
 
 function onOKClick() {
     var element = document.getElementById("select");
+    var dbRef;
+    // if admin
+    if (queryUserName == "") {
+        dbRef = database.ref('Warranties').once('value');
+    } else {
+        dbRef = database.ref('Warranties').orderByChild('brand').equalTo(queryUserName).once('value');
+    }
     if (element.options[element.selectedIndex].text == "ใบรับประกันสินค้า") {
         //gen report
-        database.ref('Warranties').once('value').then(function (snapshot) {
+        dbRef.then(function (snapshot) {
             var dictionary = {};
             var sum = 0;
             var monthName = "";
@@ -95,7 +104,14 @@ function onOKClick() {
             generateTable(ReportType.Warranty, dictionary, sum, monthName);
         });
     } else if (element.options[element.selectedIndex].text == "สินค้าที่ส่งซ่อม") {
-        database.ref('Histories').once('value').then(function (snapshot) {
+        var dbRef;
+        // if admin
+        if (queryUserName == "") {
+            dbRef = database.ref('Histories').once('value');
+        } else {
+            dbRef = database.ref('Histories').orderByChild('brand').equalTo(queryUserName).once('value');
+        }
+        dbRef.then(function (snapshot) {
             var dictionary = {};
             var sum = 0;
             var monthName = "";

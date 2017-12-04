@@ -11,13 +11,13 @@ function generateTable(reportType, dictionary, sum, monthName) {
         tableTitle = "ไม่พบข้อมูล";
     } else if (reportType == ReportType.Warranty) {
         if (monthName == "" || typeof  monthName === 'undefined') {
-            tableTitle = document.createTextNode("รายงานสินค้าที่มีการส่งซ่อมของปี 2017");
+            tableTitle = document.createTextNode("รายงานประเภทสินค้าที่มีการส่งใบรับประกันปี 2017");
         } else {
             tableTitle = document.createTextNode("รายงานประเภทสินค้าที่มีการส่งใบรับประกันของเดือน" + monthName);
         }
     } else if (reportType == ReportType.History) {
         if (monthName == "" || typeof  monthName === 'undefined') {
-            tableTitle = document.createTextNode("รายงานประเภทสินค้าที่มีการส่งใบรับประกันปี 2017");
+            tableTitle = document.createTextNode("รายงานสินค้าที่มีการส่งซ่อมของปี 2017");
         } else {
             tableTitle = document.createTextNode("รายงานประเภทสินค้าที่ส่งซ่อมของเดือน" + monthName);
         }
