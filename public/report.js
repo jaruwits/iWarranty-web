@@ -85,7 +85,7 @@ function onOKClick() {
                 var monthSelect = document.getElementById("monthSelect");
 
                 var year = buyDate.split('/')[2];
-                var month = buyDate.split('/')[1];
+                var month = parseInt(buyDate.split('/')[1],10);
 
                 if (year == yearSelect.options[yearSelect.selectedIndex].text
                     && 0 == monthSelect.options[monthSelect.selectedIndex].value) {
@@ -123,8 +123,7 @@ function onOKClick() {
                 var monthSelect = document.getElementById("monthSelect");
 
                 var year = buyDate.split('/')[2];
-                var month = buyDate.split('/')[1];
-
+                var month = parseInt(buyDate.split('/')[1],10);
                 if (year == yearSelect.options[yearSelect.selectedIndex].text
                     && 0 == monthSelect.options[monthSelect.selectedIndex].value) {
                     typeof dictionary[childData.type] === 'undefined' ? dictionary[childData.type] = 1 : dictionary[childData.type]++;
